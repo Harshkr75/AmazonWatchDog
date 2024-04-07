@@ -1,8 +1,9 @@
+"use server"
 
 import { EmailContent, EmailProductInfo, NotificationType } from "@/types";
 import nodemailer from "nodemailer";
 
-export const Notification = {
+const Notification = {
    WELCOME:"WELCOME",
    CHANGE_OF_STOCK:"CHANGE_OF_STOCK",
    LOWEST_PRICE:"LOWEST_PRICE",
@@ -10,7 +11,7 @@ export const Notification = {
 }
 
 
-export const generateEmailBody = (product: EmailProductInfo, type: NotificationType)=>{
+export async function generateEmailBody(product: EmailProductInfo, type: NotificationType){
 
    const THRESHOLD_PERCENTAGE = 40;
    const shortenedTitle = product.title.length>20?[product.title.substring(0,20)]+"..." : product.title;
